@@ -4,6 +4,7 @@ export interface IUserAuth {
   token: string;
   userName: string;
   role: string;
+  email?: string;
 }
 
 interface AppContextType {

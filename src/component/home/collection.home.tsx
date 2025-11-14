@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import demo from "@/assets/demo.jpg";
-import { getTopRestaurant } from "@/utils/api";
+// import { getTopRestaurant } from "@/utils/api";
 
 interface IProps {
   name: string;

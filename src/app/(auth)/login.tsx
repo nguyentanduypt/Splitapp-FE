@@ -28,8 +28,10 @@ const LoginPage = () => {
       setLoading(false);
 
       if (res?.token) {
+        // Lưu token
         await AsyncStorage.setItem("token", res.token);
-        setAppState(res); // lưu trực tiếp { token, userName, role }
+        // Lưu luôn email vào appState để lấy ra trong AccountPage
+        setAppState({ ...res, email }); // res = { token, userName, role, email }
         router.replace("/(tabs)"); // chuyển sang tabs
       } else {
         Alert.alert("Đăng nhập thất bại", "Sai email hoặc mật khẩu");
@@ -57,7 +59,7 @@ const LoginPage = () => {
 
         <ShareInput
           title="Password"
-          securityTextEntry
+          securityTextEntry // giữ prop securityTextEntry
           onChangeText={setPassword}
           value={password}
         />

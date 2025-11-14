@@ -1,9 +1,10 @@
 import ShareInput from "@/component/input/share.input";
 import { useCurrentApp } from "@/context/app.context";
-import { Image, Platform, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import demo from "@/assets/avatar/avatar.jpg";
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, gap: 20 },
+  container: { flex: 1, padding: 20, gap: 20, marginTop: 30 },
   center: { alignItems: "center", gap: 10, marginBottom: 30 },
   avatar: {
     width: 150,
@@ -16,41 +17,23 @@ const styles = StyleSheet.create({
 const AccountPage = () => {
   const { appState } = useCurrentApp();
 
-  // BE hiện tại chưa trả avatar, nếu muốn dùng thì cần có trường avatar
-  // const backend =
-  //   Platform.OS === "android"
-  //     ? process.env.EXPO_PUBLIC_ANDROID_API_URL
-  //     : process.env.EXPO_PUBLIC_IOS_API_URL;
-
-  // const avatarUri = appState?.avatar
-  //   ? `${backend}/images/avatar/${appState.avatar}`
-  //   : undefined;
+  const userName = appState?.userName || "";
+  const email = appState?.email || "";
 
   return (
-    // <View style={styles.container}>
-    //   <View style={styles.center}>
-    //     <Image
-    //       style={styles.avatar}
-    //       source={
-    //         avatarUri
-    //           ? { uri: avatarUri }
-    //           : require("@/assets/images/default-avatar.png") // avatar mặc định
-    //       }
-    //     />
-    //     <Text style={{ fontSize: 20, fontWeight: "600" }}>
-    //       {appState?.userName}
-    //     </Text>
-    //     <Text style={{ color: "gray" }}>{appState?.role}</Text>
-    //   </View>
+    <View style={styles.container}>
+      {/* Avatar + username */}
+      <View style={styles.center}>
+        <Image style={styles.avatar} source={demo} />
 
-    //   <View style={{ gap: 20 }}>
-    //     <ShareInput title="Full Name" value={appState?.userName || ""} />
-    //     <ShareInput title="Email" value={appState?.email || ""} />
-    //     <ShareInput title="Role" value={appState?.role || ""} />
-    //   </View>
-    // </View>
-    <View>
-      <Text>account</Text>
+        <Text style={{ fontSize: 20, fontWeight: "600" }}>{userName}</Text>
+      </View>
+
+      {/* Inputs */}
+      <View style={{ gap: 20 }}>
+        <ShareInput title="User Name" value={userName} />
+        <ShareInput title="Email" value={email} />
+      </View>
     </View>
   );
 };
